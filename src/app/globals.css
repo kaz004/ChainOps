@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme */
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 199 89% 48%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 40%;
+    --accent: 210 40% 94%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 210 40% 98%;
+    --success: 142 72% 29%;
+    --success-foreground: 210 40% 98%;
+    --warning: 32 90% 36%;
+    --warning-foreground: 210 40% 98%;
+    --info: 199 89% 36%;
+    --info-foreground: 210 40% 98%;
+    --border: 214 32% 88%;
+    --input: 214 32% 88%;
+    --ring: 199 89% 48%;
+    --radius: 0.5rem;
+
+    /* Charts */
+    --chart-1: 199 89% 45%;
+    --chart-2: 262 83% 58%;
+    --chart-3: 38 92% 50%;
+    --chart-4: 142 72% 35%;
+    --chart-5: 0 72% 51%;
+  }
+
+  .dark {
+    /* Dark (default) — deep engineering console */
+    --background: 222 47% 5%;
+    --foreground: 213 31% 91%;
+    --card: 222 44% 7%;
+    --card-foreground: 213 31% 91%;
+    --popover: 223 44% 8%;
+    --popover-foreground: 213 31% 91%;
+    --primary: 199 89% 55%;
+    --primary-foreground: 222 47% 6%;
+    --secondary: 219 36% 12%;
+    --secondary-foreground: 213 31% 85%;
+    --muted: 219 36% 11%;
+    --muted-foreground: 215 20% 62%;
+    --accent: 219 40% 14%;
+    --accent-foreground: 213 31% 91%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 69% 45%;
+    --success-foreground: 222 47% 5%;
+    --warning: 38 92% 55%;
+    --warning-foreground: 222 47% 5%;
+    --info: 199 89% 55%;
+    --info-foreground: 222 47% 5%;
+    --border: 220 30% 14%;
+    --input: 220 30% 16%;
+    --ring: 199 89% 55%;
+
+    --chart-1: 199 89% 55%;
+    --chart-2: 262 83% 66%;
+    --chart-3: 38 92% 58%;
+    --chart-4: 142 69% 48%;
+    --chart-5: 0 84% 63%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.25);
+  }
+}
+
+@layer components {
+  /* Monospace data: hashes, ids, metrics (spec §11) */
+  .font-data {
+    @apply font-mono text-[13px] tracking-tight;
+  }
+
+  /* Table density consistent across the app */
+  .data-table th {
+    @apply text-left text-[11px] font-medium uppercase tracking-wider text-muted-foreground;
+  }
+  .data-table td {
+    @apply py-2.5 text-sm;
+  }
+  .data-table tbody tr {
+    @apply border-t border-border/60 transition-colors hover:bg-accent/40;
+  }
+}
