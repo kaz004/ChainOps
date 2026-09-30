@@ -7,15 +7,17 @@
 An operator-focused SRE control plane demo connecting service health, chain RPCs, SLOs,
 incidents, evidence-based analysis, and approval-gated recovery.
 
-[Watch the walkthrough](assets/readme/chainops-walkthrough.webm) · [Open the animated recovery loop](assets/readme/operational-loop.svg)
+[Open the walkthrough video](assets/readme/chainops-walkthrough.webm) · [View the recovery workflow](assets/readme/operational-loop.svg)
 
 </div>
 
-> **Demo environment only.** Services, chains, providers, telemetry, deployments, and recovery
-> actions are simulated and stored in memory. This project does not contact RPC endpoints,
-> Kubernetes, GitHub, telemetry collectors, or external AI models. It is not production-ready.
+> **Demo mode:** service health, chains, telemetry, deployments, and recovery actions use seeded
+> simulations. No live infrastructure, RPC endpoint, repository, telemetry collector, or external
+> AI provider is contacted.
 
-![ChainOps dashboard showing seeded service health, SLOs, chains, incidents, deployments, and activity](assets/readme/dashboard.png)
+[![Animated ChainOps walkthrough showing the dashboard, chain health, and incident response](assets/readme/chainops-preview.gif)](assets/readme/chainops-walkthrough.webm)
+
+<sub>Click the preview for the full WebM walkthrough.</sub>
 
 ## The operating loop
 
@@ -31,15 +33,14 @@ before the simulator redistributes traffic and verifies recovery.
 | --- | --- |
 | ![Chain Center with simulated Ethereum, Polygon, Base, and Arbitrum provider health](assets/readme/chains.png) | ![Incident detail with correlated alerts, telemetry, timeline, and evidence](assets/readme/incident-recovery.png) |
 
-The [short WebM walkthrough](assets/readme/chainops-walkthrough.webm) cycles through the real
-local dashboard, chain health, and incident screens. These captures show seeded demo state; they
-are not live infrastructure or a recording of a real outage.
+The animated preview cycles through screenshots of the dashboard, Chain Center, and
+incident screens. Click it or use the [full WebM walkthrough](assets/readme/chainops-walkthrough.webm)
+to open the complete clip. All screens show seeded demo state.
 
 ## What is here
 
-**Status: local-first demonstration, not a production control plane.** Several workflows are
-implemented end to end against deterministic in-memory simulations. No real infrastructure is
-controlled. Review the limitations below before deploying or connecting real systems.
+**Project status:** a local-first demonstration of the ChainOps incident recovery workflow. The
+flows below run end to end against deterministic simulations; they do not operate real systems.
 
 - **Operational overview:** service health, SLO compliance, chain status, deployments, incidents,
   and recent activity.
@@ -64,9 +65,6 @@ controlled. Review the limitations below before deploying or connecting real sys
    peers and clears the injected provider failure.
 4. Check **Observability**, **SLOs**, and **Incidents** for the resulting recovery state.
 
-The UI uses seeded demo principals because authentication is not implemented. Role checks are
-demo workflow controls, not a security boundary.
-
 ## Run locally
 
 **Requirements:** Node.js 22 and npm.
@@ -89,9 +87,10 @@ npm run lint
 npm run build
 ```
 
-The test suite covers domain state machines, validation, service behavior, simulated providers,
-telemetry/SLO/incident integration, remediation policy, and the multichain recovery workflow.
-There are no browser-driven end-to-end tests yet.
+The 107 deterministic tests cover domain state machines, validation, service behavior, simulated
+providers, telemetry/SLO/incident integration, remediation policy, and the multichain recovery
+workflow. CI also type-checks, lints, and builds the app. Browser-driven end-to-end tests are not
+currently included.
 
 ## Architecture
 
@@ -116,13 +115,12 @@ simulated adapters; replacing them with real integrations would still require pr
 identity, persistence, secrets/configuration, policy enforcement, observability, and deployment
 hardening.
 
-## Honest limitations
+## Demo boundaries
 
-- No authentication or production authorization.
-- No durable database; server restart resets state.
-- No live blockchain/RPC, Kubernetes, GitHub, CI, telemetry, or AI-provider connections.
-- Gas prices, chain/provider health, and generated analysis are deterministic demo values.
-- No production deployment configuration or browser E2E coverage.
+- State is held in memory and returns to its seeded baseline when the server restarts.
+- User identities and role checks are demo workflow controls, not authentication or authorization.
+- Chain/RPC health, telemetry, deployment/CI behavior, analysis, AI results, and remediation are
+  simulated; no live infrastructure or external AI service is contacted.
 
 See [Architecture](docs/ARCHITECTURE.md), [Development](docs/DEVELOPMENT.md), and
 [Roadmap](docs/ROADMAP.md) for implementation status and engineering details.
@@ -130,5 +128,5 @@ See [Architecture](docs/ARCHITECTURE.md), [Development](docs/DEVELOPMENT.md), an
 ## Contributing and license
 
 Run the checks in [Development](docs/DEVELOPMENT.md) before opening a change. GitHub Actions runs
-tests, type checking, lint, and a production build on pushes and pull requests. No license is
-included yet; the repository owner must choose one before granting reuse rights.
+tests, type checking, lint, and a production build on pushes and pull requests. No license file is
+included; choose one before publishing if you want to grant reuse rights.
